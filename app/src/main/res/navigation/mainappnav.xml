@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/mainappnav"
+    app:startDestination="@id/taskFragment">
+
+    <fragment
+        android:id="@+id/taskFragment"
+        android:name="com.allstars.lucroniu.ui.fragments.TaskFragment"
+
+        >
+
+        <action
+            android:id="@+id/action_taskFragment_to_alarmPermissionDialogFragment"
+            app:destination="@id/alarmPermissionDialogFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_cameraPermissionDialogFragment"
+            app:destination="@id/cameraPermissionDialogFragment" />
+        <action
+            android:id="@+id/action_taskFragment_to_notificationPermissionDialogFragment"
+            app:destination="@id/notificationPermissionDialogFragment" />
+    </fragment>
+    <dialog
+        android:id="@+id/cameraPermissionDialogFragment"
+        android:name="com.allstars.lucroniu.ui.fragments.CameraPermissionDialogFragment"
+        android:label="CameraPermissionDialogFragment" />
+    <dialog
+        android:id="@+id/notificationPermissionDialogFragment"
+        android:name="com.allstars.lucroniu.ui.fragments.NotificationPermissionDialogFragment"
+        android:label="NotificationPermissionDialogFragment" />
+    <dialog
+        android:id="@+id/alarmPermissionDialogFragment"
+        android:name="com.allstars.lucroniu.ui.fragments.AlarmPermissionDialogFragment"
+        android:label="AlarmPermissionDialogFragment" />
+
+</navigation>

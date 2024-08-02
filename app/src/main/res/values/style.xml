@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <style name="ListTitleTextStyle">
+        <item name="android:fontFamily">@font/worksans</item>
+        <item name="android:textColor">?attr/textFillColor</item>
+        <item name="android:textSize">18sp</item>
+    </style>
+    <style name="ListSmallTextStyle" parent="ListTitleTextStyle">
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textSize">12sp</item>
+    </style>
+    <style name="MinorCardView" >
+        <item name="android:backgroundTint">?attr/colorContainer</item>
+    </style>
+</resources>

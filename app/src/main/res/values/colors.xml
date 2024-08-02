@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="primary_colourlight">#FBFCFF</color>
+    <color name="primary_colourdark">#09070f</color>
+    <color name="accent_colour_light">#253294</color>
+    <color name="accent_optional_colour_light">#736CED</color>
+    <color name="accent_colour_dark">#9b24b3</color>
+    <color name="highlight_colour_light">#55085e</color>
+    <color name="toolbar_colour">@android:color/transparent</color>
+    <color name="mainTextColour_dark">#F0E8F1</color>
+    <color name="primaryBackground_colour_dark">#141414</color>
+    <color name="green">#23CE6B</color>
+</resources>
