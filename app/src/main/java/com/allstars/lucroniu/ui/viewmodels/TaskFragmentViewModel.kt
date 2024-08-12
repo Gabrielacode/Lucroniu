@@ -1,5 +1,7 @@
 package com.allstars.lucroniu.ui.viewmodels
 
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
@@ -20,6 +22,16 @@ import java.util.TimeZone
 import kotlin.random.Random
 
 class TaskFragmentViewModel( private val taskRepository: TaskRepository) : ViewModel() {
+    private var _listofTasks :MutableLiveData<List<TaskModel>> = MutableLiveData()
+     val listofTasks :LiveData<List<TaskModel>>
+         get() = _listofTasks
+    init {
+        viewModelScope.launch {
+            getListOfTaskAsModel().collect{
+                _listofTasks.value = it
+            }
+        }
+    }
 
 
  suspend fun getListOfTaskAsModel(): Flow<List<TaskModel>> {

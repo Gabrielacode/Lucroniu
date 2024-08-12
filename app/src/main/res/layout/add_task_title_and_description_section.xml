@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="?attr/colorPrimary"
+        android:minHeight="?attr/actionBarSize"
+        android:theme="?attr/actionBarTheme"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/nestedScrollView"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:fillViewport="true"
+        android:paddingVertical="8dp"
+        app:layout_constraintBottom_toTopOf="@+id/buttonLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/toolbar">
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:paddingHorizontal="12dp">
+            <TextView
+                android:id="@+id/title"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/title"
+                android:textSize="20sp"
+                android:fontFamily="@font/worksans"
+
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/title_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/title"
+                android:background="@drawable/edit_text_background"
+                android:inputType="text|textMultiLine"
+                android:minHeight="60dp"
+                android:layout_marginBottom="12dp"
+                />
+            <TextView
+                android:id="@+id/description"
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="@string/description"
+                android:layout_below="@id/title_et"
+                android:textSize="20sp"
+                android:fontFamily="@font/worksans"
+                android:layout_marginBottom="12dp"/>
+
+            <EditText
+                android:id="@+id/description_et"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/description"
+                android:background="@drawable/edit_text_background"
+                android:inputType="text|textMultiLine"
+                android:minHeight="60dp"
+                android:layout_marginBottom="12dp"
+                />
+
+        </RelativeLayout>
+    </androidx.core.widget.NestedScrollView>
+
+    <LinearLayout
+        android:id="@+id/buttonLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
+
+        <Button
+            android:id="@+id/nextbutton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/set_time_button" />
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

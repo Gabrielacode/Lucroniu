@@ -1,0 +1,17 @@
+<!-- res/drawable/myanimstatedrawable.xml -->
+<animated-selector
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <!-- provide a different drawable for each state-->
+    <item android:id="@+id/pressed" android:drawable="@drawable/alarm_icon"
+        android:state_pressed="true"/>
+    <item android:id="@+id/notPressed" android:drawable="@drawable/updatetaskicon"
+        android:state_pressed="false"/>
+
+
+    <!-- specify a transition -->
+    <transition  android:fromId="@+id/notPressed" android:toId="@+id/pressed" android:drawable="@drawable/avd_tick_anim" >
+
+    </transition>
+    ...
+</animated-selector>

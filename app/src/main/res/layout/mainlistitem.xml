@@ -15,11 +15,13 @@
         >
 
         <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/mainConstraintLayout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:paddingTop="12dp"
             android:paddingStart="12dp"
-            android:paddingEnd="12dp">
+            android:paddingEnd="12dp"
+          >
 
             <androidx.constraintlayout.widget.Group
                 android:id="@+id/buttonGroup"
@@ -69,7 +71,8 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toEndOf="@+id/deleteButton"
-                app:srcCompat="@drawable/updatetaskicon" />
+                app:srcCompat="@drawable/animated_state_list"
+                />
 
             <ImageButton
                 android:id="@+id/deleteButton"

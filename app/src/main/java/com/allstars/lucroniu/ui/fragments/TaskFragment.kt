@@ -51,6 +51,11 @@ class TaskFragment : Fragment(),MainTaskListAdapterCallBack {
     private lateinit var mainListLayoutManager:LayoutManager
     lateinit var mainTaskListAdapter: MainTaskListAdapter
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        Log.i("TaskService", "OnCreate")
+        viewModel = ViewModelProvider(this,TaskFragmentViewModelFactory(TaskRepository((LucroniuApp.taskDatabase as TaskDatabase).taskDao()))).get(TaskFragmentViewModel::class.java)
+    }
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -63,17 +68,15 @@ class TaskFragment : Fragment(),MainTaskListAdapterCallBack {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.i("TaskService", "OnViewCreated")
 
         //Setup navigation for toolbar
         val navController = Navigation.findNavController(binding.mainLayout)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         binding.toolBar.setupWithNavController(navController,appBarConfiguration)
 
-        // Set up the icon of the user menu item
-        binding.appBarLayout.addOnOffsetChangedListener { appBarLayout, i ->
-            Log.i("Behaviour"," Total Height : ${appBarLayout.layoutParams.height} , Real Height : ${appBarLayout.height} Total Scroll Range : ${appBarLayout.totalScrollRange} Range : $i")
-        }
-        viewModel = ViewModelProvider(this,TaskFragmentViewModelFactory(TaskRepository((LucroniuApp.taskDatabase as TaskDatabase).taskDao()))).get(TaskFragmentViewModel::class.java)
+
+
         mainTaskListAdapter = MainTaskListAdapter(this)
         binding.mainRc.adapter = mainTaskListAdapter
 
@@ -83,40 +86,44 @@ class TaskFragment : Fragment(),MainTaskListAdapterCallBack {
        binding.mainRc.layoutManager = mainListLayoutManager
 
         //Observe the Flow for the Adapter
-        viewLifecycleOwner.lifecycleScope.launch {
-            repeatOnLifecycle(Lifecycle.State.STARTED){
-                viewModel.getListOfTaskAsModel().collect{
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            repeatOnLifecycle(Lifecycle.State.STARTED){
+//                viewModel.getListOfTaskAsModel().collect{
+//
+//                    Log.i("TaskService", it.toString())
+//                    mainTaskListAdapter.submitList(it)
+//
+//                }
+//            }
+//        }
+        viewModel.listofTasks.observe(viewLifecycleOwner){
 
-                    Log.i("TaskService", it.toString())
-                    mainTaskListAdapter.submitList(it)
-
-                }
-            }
+            mainTaskListAdapter.submitList(it)
         }
         binding.addButton.setOnClickListener {
-            val title = "Random Task"
-            val calendar = Calendar.getInstance(TimeZone.getDefault())
-            val startTime = calendar.time
-            val endTime = Date(startTime.time + Random.nextLong(30000, 100000))
-            val priority = Priority.Low
-             val taskModel = TaskModel(title = title, startTime = startTime, endTime = endTime, priority = priority)
-
-
-            //Then call the viewModel insert task for the data base
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-                PermissionHandler.requestPermission(Manifest.permission.SCHEDULE_EXACT_ALARM,requireActivity()) {}
-            }
-
-                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
-
-                    val insertedId = viewModel.insertTask(taskModel)
-                    Log.i("TaskService",insertedId.toString())
-                    //Set the alarm here
-                    AlarmHandler.setAlarmforTask(taskModel.copy(id=insertedId),requireContext())
-                }
-
-
-
+//            val title = "Random Task"
+//            val calendar = Calendar.getInstance(TimeZone.getDefault())
+//            val startTime = calendar.time
+//            val endTime = Date(startTime.time + Random.nextLong(30000, 100000))
+//            val priority = Priority.Low
+//             val taskModel = TaskModel(title = title, startTime = startTime, endTime = endTime, priority = priority)
+//
+//
+//            //Then call the viewModel insert task for the data base
+//            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+//                PermissionHandler.requestPermission(Manifest.permission.SCHEDULE_EXACT_ALARM,requireActivity()) {}
+//            }
+//
+//                viewLifecycleOwner.lifecycleScope.launch(Dispatchers.Main) {
+//
+//                    val insertedId = viewModel.insertTask(taskModel)
+//                    Log.i("TaskService",insertedId.toString())
+//                    //Set the alarm here
+//                    AlarmHandler.setAlarmforTask(taskModel.copy(id=insertedId),requireContext())
+//                }
+//
+//
+          navController.navigate(R.id.action_taskFragment_to_addTaskFragment)
         }
 
 
@@ -135,3 +142,6 @@ class TaskFragment : Fragment(),MainTaskListAdapterCallBack {
 
 }
 //While working with Coordinator Layout sometimes behaviours determine the layout of children
+//For the fix of the fragment titles  we need to remove the labe;ls dor the navigation destinations as they were designed for use when there is only
+//one tool bar and we are switching destinations
+//We just set the tool bar  title

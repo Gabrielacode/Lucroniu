@@ -5,6 +5,7 @@ import android.app.Notification
 import android.app.NotificationChannel
 import android.app.NotificationManager
 import android.os.Build
+import android.util.Log
 import androidx.annotation.RequiresApi
 import androidx.core.app.NotificationChannelCompat
 import androidx.room.RoomDatabase
@@ -12,6 +13,7 @@ import com.allstars.lucroniu.data.database.TaskDatabase
 import com.allstars.lucroniu.data.entities.Task
 import com.allstars.lucroniu.ui.utils.AlarmHandler
 import com.allstars.lucroniu.ui.utils.NotificationHandler
+import kotlin.time.measureTime
 
 class LucroniuApp :Application(){
 
@@ -24,6 +26,7 @@ class LucroniuApp :Application(){
     }
     override fun onCreate() {
         super.onCreate()
+
          taskDatabase = TaskDatabase.getDatabase(applicationContext)
          NotificationHandler.initManager(applicationContext)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
@@ -32,4 +35,5 @@ class LucroniuApp :Application(){
         AlarmHandler.initManager(applicationContext)
 
     }
+
 }

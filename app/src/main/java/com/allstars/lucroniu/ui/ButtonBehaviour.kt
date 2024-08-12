@@ -1,18 +1,13 @@
-package com.allstars.lucroniu
+package com.allstars.lucroniu.ui
 
 import android.content.Context
 import android.util.AttributeSet
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import androidx.coordinatorlayout.widget.CoordinatorLayout
 import androidx.core.view.ViewCompat
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import kotlin.math.max
 import kotlin.math.min
-import kotlin.math.sign
-import kotlin.math.ulp
 
 
 class ButtonBehaviour<V :View> (context: Context, attrs: AttributeSet): CoordinatorLayout.Behavior<V> (context,attrs){
@@ -44,7 +39,7 @@ class ButtonBehaviour<V :View> (context: Context, attrs: AttributeSet): Coordina
 
 
         super.onNestedPreScroll(coordinatorLayout, child, target, dx, dy, consumed, type)
-        val scale_rate :Float = 100f
+        val scale_rate :Float = 150f
         Log.i("Behaviour","Value $dy")
         val dyAsFloat = dy.toFloat()
 

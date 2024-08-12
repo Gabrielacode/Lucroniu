@@ -1,5 +1,6 @@
 package com.allstars.lucroniu.ui.adapters
 
+import android.animation.LayoutTransition
 import android.graphics.Paint
 import android.graphics.drawable.GradientDrawable
 import android.graphics.drawable.LayerDrawable
@@ -14,10 +15,15 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.view.isVisible
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView.ViewHolder
+import androidx.transition.Slide
+import androidx.transition.Transition
+import androidx.transition.TransitionListenerAdapter
+import androidx.transition.TransitionManager
 import com.allstars.lucroniu.data.entities.Task
 import com.allstars.lucroniu.databinding.MainlistitemBinding
 import com.allstars.lucroniu.domain.models.TaskModel
@@ -77,6 +83,9 @@ class MainTaskListAdapter (val callBack: MainTaskListAdapterCallBack): ListAdapt
 
             }
             binding.root.setOnLongClickListener {
+                //Testing Transistions for layouts
+                TransitionManager.beginDelayedTransition(binding.mainConstraintLayout, Slide())
+                //The transistions have listners that we can use to know whetehr
                 if(binding.buttonGroup.visibility == View.VISIBLE){
                     binding.buttonGroup.visibility = View.GONE
                 }else{
@@ -106,6 +115,7 @@ class MainTaskListAdapter (val callBack: MainTaskListAdapterCallBack): ListAdapt
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MainTaskListViewHolder {
         val binding = MainlistitemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+
         return MainTaskListViewHolder(binding)
     }
 
